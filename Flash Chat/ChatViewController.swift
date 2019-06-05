@@ -80,10 +80,6 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     ///////////////////////////////////////////
     //MARK: - Send & Recieve from Firebase
     
-    
-    
-    
-    
     @IBAction func sendPressed(_ sender: AnyObject) {
         messageTextfield.endEditing(true)
         messageTextfield.isEnabled = false
@@ -99,8 +95,6 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             if error != nil {
                 print(error!)
             } else {
-                print("Message saved successfully!")
-                
                 self.messageTextfield.isEnabled = true
                 self.messageTextfield.text = ""
                 self.sendButton.isEnabled = true
