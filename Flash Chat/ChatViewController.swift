@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import ChameleonFramework
 
 class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
@@ -32,6 +33,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         configureTableView()
         
         retrieveMessages()
+        
+        messageTableView.separatorStyle = .none
     }
 
     ///////////////////////////////////////////
@@ -42,6 +45,14 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.messageBody.text = messageArray[indexPath.row].messageBody
         cell.senderUsername.text = messageArray[indexPath.row].sender
         cell.avatarImageView.image = UIImage(named: "egg")
+        
+        if cell.senderUsername.text == Auth.auth().currentUser?.email {
+            cell.avatarImageView.backgroundColor = UIColor.flatMint()
+            cell.messageBackground.backgroundColor = UIColor.flatSkyBlue()
+        } else {
+            cell.avatarImageView.backgroundColor = UIColor.flatWatermelon()
+            cell.messageBackground.backgroundColor = UIColor.flatGray()
+        }
         
         return cell
     }
@@ -56,9 +67,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func configureTableView() {
         messageTableView.rowHeight = UITableView.automaticDimension
-        messageTableView.estimatedRowHeight = 120.0
+        messageTableView.estimatedRowHeight = 400.0
     }
-    
     
     ///////////////////////////////////////////
     //MARK:- TextField Delegate Methods
